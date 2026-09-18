@@ -28,7 +28,7 @@ return [
     'phone_href' => 'tel:+32497614434',
     'facebook' => 'https://www.facebook.com/ladiescircledendermonde/',
     'national' => 'https://ladiescircle.be/nl',
-    'logo' => '/media/brand/lc-logo-paard.jpg',
+    'logo' => '/media/brand/lc-logo-paard.png',
     'logo_belgium' => '/media/brand/lcb-logo.png',
     'nav' => [
         ['label' => 'Home', 'route' => 'home'],

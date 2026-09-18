@@ -12,7 +12,7 @@
     <meta property="og:title" content="@yield('title', config('club.name'))">
     <meta property="og:description" content="@yield('description', config('club.tagline'))">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="{{ url('/media/brand/lc-logo-paard.jpg') }}">
+    <meta property="og:image" content="{{ url('/media/brand/lc-logo-paard.png') }}">
     <script type="application/ld+json">
         {!! json_encode([
             '@context' => 'https://schema.org',
