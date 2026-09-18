@@ -14,25 +14,13 @@ Route::get('/rose-bestellen', [SiteController::class, 'rose'])->name('rose-beste
 Route::get('/algemene-voorwaarden-bestel-en-levervoorwaarden', [SiteController::class, 'voorwaarden'])->name('voorwaarden');
 Route::get('/sitemap.xml', [SiteController::class, 'sitemap'])->name('sitemap');
 
-Route::get('/{slug}', [SiteController::class, 'archive'])
-    ->whereIn('slug', [
-        'impressies-annual-witches-ball-2018',
-        'album-dagenraad',
-        'fotoreportage-recharter',
-        'spinning-for-charity',
-        'sponsoring-spinning-for-charity',
-        'sponsoring-witches-ball-2025',
-        'inschrijvingsformulier-magical-witches-ball-2025',
-        'candle-light-diner-with-the-witches',
-        'the-witches-night',
-        'recharter',
-        'inschrijving-recharter',
-    ])
-    ->name('archive');
-
 Route::permanentRedirect('/home', '/');
 Route::permanentRedirect('/home/', '/');
 Route::permanentRedirect('/no-access', '/');
 Route::permanentRedirect('/no-access/', '/');
 Route::permanentRedirect('/onze-rose-verkoop-is-open-2', '/rose-bestellen');
 Route::permanentRedirect('/onze-rose-verkoop-is-open-2/', '/rose-bestellen');
+
+Route::get('/{slug}', [SiteController::class, 'archive'])
+    ->where('slug', '[a-z0-9-]+')
+    ->name('archive');

@@ -2,20 +2,26 @@
 
 namespace App\Content;
 
+use App\Models\Album;
+use App\Models\Member;
+use App\Models\Page;
+use App\Models\Project;
+use App\Models\SiteEvent;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\File;
 
 class ContentRepository
 {
-    /** @var array<string, mixed> */
-    private array $cache = [];
-
     /**
      * @return Collection<int, array<string, mixed>>
      */
     public function members(): Collection
     {
-        return $this->collection('members.json')->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE)->values();
+        return Member::query()
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get()
+            ->map(fn (Member $member) => $member->toSiteArray())
+            ->values();
     }
 
     /**
@@ -23,21 +29,12 @@ class ContentRepository
      */
     public function board(): Collection
     {
-        $rank = [
-            'voorzitster 2026-2027' => 1,
-            'vice-voorzitster 2026-2027' => 2,
-            'vice-voorzitster zone 1 2026-2027' => 3,
-            'past-voorzitster 2026-2027' => 4,
-            'secretaresse 2026-2027' => 5,
-            'community service lady (csl) 2026-2027' => 6,
-            'contact lady 2026-2027' => 7,
-            'penning 2026-2027' => 8,
-            'social media en weblady 2026-2027' => 9,
-        ];
-
-        return $this->members()
+        return Member::query()
             ->where('group', 'bestuur')
-            ->sortBy(fn (array $member) => $rank[mb_strtolower($member['role'])] ?? 20)
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get()
+            ->map(fn (Member $member) => $member->toSiteArray())
             ->values();
     }
 
@@ -46,7 +43,12 @@ class ContentRepository
      */
     public function activeMembers(): Collection
     {
-        return $this->members()->where('group', 'lid')->values();
+        return Member::query()
+            ->where('group', 'lid')
+            ->orderBy('name')
+            ->get()
+            ->map(fn (Member $member) => $member->toSiteArray())
+            ->values();
     }
 
     /**
@@ -54,7 +56,12 @@ class ContentRepository
      */
     public function senioritas(): Collection
     {
-        return $this->members()->where('group', 'seniorita')->values();
+        return Member::query()
+            ->where('group', 'seniorita')
+            ->orderBy('name')
+            ->get()
+            ->map(fn (Member $member) => $member->toSiteArray())
+            ->values();
     }
 
     /**
@@ -62,12 +69,22 @@ class ContentRepository
      */
     public function inMemoriam(): Collection
     {
-        return $this->members()->where('group', 'in-memoriam')->values();
+        return Member::query()
+            ->where('group', 'in-memoriam')
+            ->orderBy('name')
+            ->get()
+            ->map(fn (Member $member) => $member->toSiteArray())
+            ->values();
     }
 
     public function originStory(): string
     {
-        return File::get(resource_path('content/origin-story.txt'));
+        return (string) Page::query()->where('slug', 'origin-story')->value('body');
+    }
+
+    public function pageBody(string $slug): string
+    {
+        return (string) Page::query()->where('slug', $slug)->value('body');
     }
 
     /**
@@ -75,8 +92,10 @@ class ContentRepository
      */
     public function projects(): Collection
     {
-        return $this->collection('projects.json')
-            ->sortByDesc('date')
+        return Project::query()
+            ->orderByDesc('date')
+            ->get()
+            ->map(fn (Project $project) => $project->toSiteArray())
             ->values();
     }
 
@@ -93,7 +112,7 @@ class ContentRepository
      */
     public function project(string $slug): ?array
     {
-        return $this->projects()->firstWhere('slug', $slug);
+        return Project::query()->where('slug', $slug)->first()?->toSiteArray();
     }
 
     /**
@@ -101,7 +120,11 @@ class ContentRepository
      */
     public function albums(): Collection
     {
-        return $this->collection('albums.json');
+        return Album::query()
+            ->orderBy('title')
+            ->get()
+            ->map(fn (Album $album) => $album->toSiteArray())
+            ->values();
     }
 
     /**
@@ -109,7 +132,7 @@ class ContentRepository
      */
     public function album(string $slug): ?array
     {
-        return $this->albums()->firstWhere('slug', $slug);
+        return Album::query()->where('slug', $slug)->first()?->toSiteArray();
     }
 
     /**
@@ -117,7 +140,11 @@ class ContentRepository
      */
     public function events(): Collection
     {
-        return $this->collection('events.json');
+        return SiteEvent::query()
+            ->orderBy('title')
+            ->get()
+            ->map(fn (SiteEvent $event) => $event->toSiteArray())
+            ->values();
     }
 
     /**
@@ -125,19 +152,6 @@ class ContentRepository
      */
     public function event(string $slug): ?array
     {
-        return $this->events()->firstWhere('slug', $slug);
-    }
-
-    /**
-     * @return Collection<int, array<string, mixed>>
-     */
-    private function collection(string $filename): Collection
-    {
-        if (! isset($this->cache[$filename])) {
-            $path = resource_path('content/'.$filename);
-            $this->cache[$filename] = json_decode(File::get($path), true, 512, JSON_THROW_ON_ERROR);
-        }
-
-        return collect($this->cache[$filename]);
+        return SiteEvent::query()->where('slug', $slug)->first()?->toSiteArray();
     }
 }

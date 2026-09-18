@@ -24,15 +24,22 @@ php artisan serve
 
 De site is dan bereikbaar op http://localhost:8000.
 
-## Content wijzigen
+```bash
+php artisan migrate --seed
+```
 
-- Leden: `resources/content/members.json` + foto in `public/media/leden/`
-- Projecten: `resources/content/projects.json` + beelden in `public/media/projecten/`
-- Evenementen: `resources/content/events.json`
-- Albums: `resources/content/albums.json`
-- Clubgegevens (adres, IBAN, nav): `config/club.php`
+## Admin
 
-Daarna deployen. Er is geen admin-panel.
+Het CMS zit op http://localhost:8000/admin
+
+Standaard login (aanpasbaar in `.env`):
+
+- E-mail: `weblady@lcdendermonde.be`
+- Wachtwoord: `password`
+
+Daarin beheer je leden, projecten, evenementen, albums, pagina’s (o.a. ons verhaal en de voorwaarden) en de berichten van de join- en contactformulieren. Foto’s worden opgeslagen in `public/media`.
+
+Clubgegevens zoals adres en IBAN blijven in `config/club.php`.
 
 ## Mail
 

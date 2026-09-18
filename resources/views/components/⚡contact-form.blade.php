@@ -1,6 +1,7 @@
 <?php
 
 use App\Mail\ContactMessage;
+use App\Models\FormSubmission;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Component;
@@ -65,12 +66,21 @@ new class extends Component
 
         RateLimiter::hit($key, 60);
 
-        Mail::to(config('club.contact_email'))->send(new ContactMessage([
+        $payload = [
             'naam' => $this->naam,
             'email' => $this->email,
             'telefoon' => $this->telefoon,
             'bericht' => $this->bericht,
-        ]));
+        ];
+
+        FormSubmission::query()->create([
+            'type' => 'contact',
+            'name' => $this->naam,
+            'email' => $this->email,
+            'payload' => $payload,
+        ]);
+
+        Mail::to(config('club.contact_email'))->send(new ContactMessage($payload));
 
         $this->sent = true;
     }

@@ -115,4 +115,33 @@ class SiteTest extends TestCase
     {
         $this->get('/projecten/bestaat-niet')->assertNotFound();
     }
+
+    public function test_admin_login_is_available(): void
+    {
+        $this->get('/admin/login')->assertOk();
+        $this->get('/admin')->assertRedirect();
+    }
+
+    public function test_join_form_stores_a_submission(): void
+    {
+        Mail::fake();
+
+        Livewire::test('join-form')
+            ->set('voornaam', 'Anna')
+            ->set('naam', 'Peeters')
+            ->set('straat', 'Kerkstraat 1')
+            ->set('plaats', 'Dendermonde')
+            ->set('postcode', '9200')
+            ->set('geboortedatum', '1995-04-12')
+            ->set('email', 'anna@example.com')
+            ->set('gsm', '0470000000')
+            ->set('motivatie', 'Ik wil me inzetten voor lokale projecten.')
+            ->set('hoe', 'Via Facebook')
+            ->call('send');
+
+        $this->assertDatabaseHas('form_submissions', [
+            'type' => 'join',
+            'email' => 'anna@example.com',
+        ]);
+    }
 }

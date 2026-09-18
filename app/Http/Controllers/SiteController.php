@@ -71,7 +71,9 @@ class SiteController extends Controller
 
     public function voorwaarden(): View
     {
-        return view('pages.voorwaarden');
+        return view('pages.voorwaarden', [
+            'body' => $this->content->pageBody('voorwaarden'),
+        ]);
     }
 
     public function archive(string $slug): View
