@@ -39,6 +39,8 @@ class SiteController extends Controller
     {
         return view('pages.projecten', [
             'years' => $this->content->projectsByYear(),
+            'albums' => $this->content->albums(),
+            'events' => $this->content->events(),
         ]);
     }
 
@@ -71,7 +73,9 @@ class SiteController extends Controller
 
     public function voorwaarden(): View
     {
-        return view('pages.voorwaarden');
+        return view('pages.voorwaarden', [
+            'body' => $this->content->pageBody('voorwaarden'),
+        ]);
     }
 
     public function archive(string $slug): View

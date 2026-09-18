@@ -18,14 +18,28 @@
             </section>
         @endforeach
 
-        <section class="panel p-8">
-            <h2 class="font-serif text-2xl text-navy">Fotoalbums</h2>
-            <p class="mt-2 text-muted">Sfeerbeelden van eerdere projecten en feesten.</p>
-            <ul class="mt-4 space-y-2 font-medium text-navy">
-                <li><a href="{{ route('archive', 'album-dagenraad') }}" class="hover:text-gold">Project Dageraad — voor en na</a></li>
-                <li><a href="{{ route('archive', 'impressies-annual-witches-ball-2018') }}" class="hover:text-gold">Impressies Annual Witches Ball 2018</a></li>
-                <li><a href="{{ route('archive', 'fotoreportage-recharter') }}" class="hover:text-gold">Fotoreportage Recharter 2017</a></li>
-            </ul>
-        </section>
+        @if ($albums->isNotEmpty())
+            <section class="panel p-8">
+                <h2 class="font-serif text-2xl text-navy">Fotoalbums</h2>
+                <p class="mt-2 text-muted">Sfeerbeelden van eerdere projecten en feesten.</p>
+                <ul class="mt-4 space-y-2 font-medium text-navy">
+                    @foreach ($albums as $album)
+                        <li><a href="{{ route('archive', $album['slug']) }}" class="hover:text-gold">{{ $album['title'] }}</a></li>
+                    @endforeach
+                </ul>
+            </section>
+        @endif
+
+        @if ($events->isNotEmpty())
+            <section class="panel p-8">
+                <h2 class="font-serif text-2xl text-navy">Evenementen</h2>
+                <p class="mt-2 text-muted">Archief van feesten, spinningen en andere momenten.</p>
+                <ul class="mt-4 space-y-2 font-medium text-navy">
+                    @foreach ($events as $event)
+                        <li><a href="{{ route('archive', $event['slug']) }}" class="hover:text-gold">{{ $event['title'] }}</a></li>
+                    @endforeach
+                </ul>
+            </section>
+        @endif
     </div>
 @endsection

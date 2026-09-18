@@ -38,4 +38,11 @@ return [
         ['label' => 'Lid worden', 'route' => 'lid-worden'],
         ['label' => 'Contact', 'route' => 'contact'],
     ],
+    'admin_name' => env('ADMIN_NAME', 'Weblady'),
+    'admin_email' => env('ADMIN_EMAIL', 'weblady@lcdendermonde.be'),
+    'admin_password' => env('ADMIN_PASSWORD', 'password'),
+    'admin_emails' => array_values(array_filter(array_map(
+        static fn (string $email): string => strtolower(trim($email)),
+        explode(',', (string) env('ADMIN_EMAILS', env('ADMIN_EMAIL', 'weblady@lcdendermonde.be'))),
+    ))),
 ];

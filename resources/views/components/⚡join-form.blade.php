@@ -1,6 +1,7 @@
 <?php
 
 use App\Mail\JoinApplication;
+use App\Models\FormSubmission;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Component;
@@ -90,7 +91,7 @@ new class extends Component
 
         RateLimiter::hit($key, 60);
 
-        Mail::to(config('club.contact_email'))->send(new JoinApplication([
+        $payload = [
             'voornaam' => $this->voornaam,
             'naam' => $this->naam,
             'straat' => $this->straat,
@@ -101,7 +102,16 @@ new class extends Component
             'gsm' => $this->gsm,
             'motivatie' => $this->motivatie,
             'hoe' => $this->hoe,
-        ]));
+        ];
+
+        FormSubmission::query()->create([
+            'type' => 'join',
+            'name' => trim($this->voornaam.' '.$this->naam),
+            'email' => $this->email,
+            'payload' => $payload,
+        ]);
+
+        Mail::to(config('club.contact_email'))->send(new JoinApplication($payload));
 
         $this->sent = true;
     }
