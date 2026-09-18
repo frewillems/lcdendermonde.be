@@ -6,6 +6,7 @@ use App\Filament\Resources\Projects\Pages\CreateProject;
 use App\Filament\Resources\Projects\Pages\EditProject;
 use App\Filament\Resources\Projects\Pages\ListProjects;
 use App\Models\Project;
+use App\Support\Media;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -75,7 +76,8 @@ class ProjectResource extends Resource
                     ->image()
                     ->disk('media')
                     ->directory('projecten')
-                    ->visibility('public'),
+                    ->visibility('public')
+                    ->maxSize(Media::MAX_UPLOAD_KB),
                 FileUpload::make('images')
                     ->label('Galerie')
                     ->image()
@@ -84,6 +86,7 @@ class ProjectResource extends Resource
                     ->disk('media')
                     ->directory('projecten')
                     ->visibility('public')
+                    ->maxSize(Media::MAX_UPLOAD_KB)
                     ->columnSpanFull(),
             ]);
     }

@@ -6,6 +6,8 @@ use App\Filament\Resources\Albums\Pages\CreateAlbum;
 use App\Filament\Resources\Albums\Pages\EditAlbum;
 use App\Filament\Resources\Albums\Pages\ListAlbums;
 use App\Models\Album;
+use App\Support\ArchiveSlug;
+use App\Support\Media;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -52,7 +54,9 @@ class AlbumResource extends Resource
                 TextInput::make('slug')
                     ->required()
                     ->unique(ignoreRecord: true)
-                    ->maxLength(255),
+                    ->rules(ArchiveSlug::rules('events'))
+                    ->maxLength(255)
+                    ->helperText('URL: lcdendermonde.be/jouw-slug — mag niet botsen met een evenement of een vaste pagina.'),
                 FileUpload::make('images')
                     ->label('Foto’s')
                     ->image()
@@ -61,6 +65,7 @@ class AlbumResource extends Resource
                     ->disk('media')
                     ->directory('albums')
                     ->visibility('public')
+                    ->maxSize(Media::MAX_UPLOAD_KB)
                     ->columnSpanFull(),
             ]);
     }

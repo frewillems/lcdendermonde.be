@@ -45,6 +45,7 @@ class ContentRepository
     {
         return Member::query()
             ->where('group', 'lid')
+            ->orderBy('sort_order')
             ->orderBy('name')
             ->get()
             ->map(fn (Member $member) => $member->toSiteArray())
@@ -58,6 +59,7 @@ class ContentRepository
     {
         return Member::query()
             ->where('group', 'seniorita')
+            ->orderBy('sort_order')
             ->orderBy('name')
             ->get()
             ->map(fn (Member $member) => $member->toSiteArray())
@@ -71,6 +73,7 @@ class ContentRepository
     {
         return Member::query()
             ->where('group', 'in-memoriam')
+            ->orderBy('sort_order')
             ->orderBy('name')
             ->get()
             ->map(fn (Member $member) => $member->toSiteArray())

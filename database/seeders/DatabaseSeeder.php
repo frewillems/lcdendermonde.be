@@ -9,11 +9,11 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::query()->updateOrCreate(
-            ['email' => env('ADMIN_EMAIL', 'weblady@lcdendermonde.be')],
+        User::query()->firstOrCreate(
+            ['email' => config('club.admin_email')],
             [
-                'name' => env('ADMIN_NAME', 'Weblady'),
-                'password' => env('ADMIN_PASSWORD', 'password'),
+                'name' => config('club.admin_name'),
+                'password' => config('club.admin_password'),
             ],
         );
 

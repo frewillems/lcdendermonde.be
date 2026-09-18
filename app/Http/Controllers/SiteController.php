@@ -39,6 +39,8 @@ class SiteController extends Controller
     {
         return view('pages.projecten', [
             'years' => $this->content->projectsByYear(),
+            'albums' => $this->content->albums(),
+            'events' => $this->content->events(),
         ]);
     }
 

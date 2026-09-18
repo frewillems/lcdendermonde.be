@@ -34,6 +34,6 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return true;
+        return in_array(strtolower($this->email), config('club.admin_emails'), true);
     }
 }

@@ -28,7 +28,7 @@ class ContentSeeder extends Seeder
         ];
 
         foreach ($this->json('members.json') as $member) {
-            Member::query()->updateOrCreate(
+            Member::query()->firstOrCreate(
                 ['slug' => $member['slug']],
                 [
                     'name' => $member['name'],
@@ -42,7 +42,7 @@ class ContentSeeder extends Seeder
         }
 
         foreach ($this->json('projects.json') as $project) {
-            Project::query()->updateOrCreate(
+            Project::query()->firstOrCreate(
                 ['slug' => $project['slug']],
                 [
                     'title' => $project['title'],
@@ -57,7 +57,7 @@ class ContentSeeder extends Seeder
         }
 
         foreach ($this->json('events.json') as $event) {
-            SiteEvent::query()->updateOrCreate(
+            SiteEvent::query()->firstOrCreate(
                 ['slug' => $event['slug']],
                 [
                     'title' => $event['title'],
@@ -71,7 +71,7 @@ class ContentSeeder extends Seeder
         }
 
         foreach ($this->json('albums.json') as $album) {
-            Album::query()->updateOrCreate(
+            Album::query()->firstOrCreate(
                 ['slug' => $album['slug']],
                 [
                     'title' => $album['title'],
@@ -80,7 +80,7 @@ class ContentSeeder extends Seeder
             );
         }
 
-        Page::query()->updateOrCreate(
+        Page::query()->firstOrCreate(
             ['slug' => 'origin-story'],
             [
                 'title' => 'Ons verhaal',
@@ -88,7 +88,7 @@ class ContentSeeder extends Seeder
             ],
         );
 
-        Page::query()->updateOrCreate(
+        Page::query()->firstOrCreate(
             ['slug' => 'voorwaarden'],
             [
                 'title' => 'Algemene voorwaarden',

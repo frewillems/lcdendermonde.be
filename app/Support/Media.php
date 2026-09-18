@@ -4,6 +4,8 @@ namespace App\Support;
 
 class Media
 {
+    public const MAX_UPLOAD_KB = 5120;
+
     public static function url(?string $path): ?string
     {
         if ($path === null || $path === '') {

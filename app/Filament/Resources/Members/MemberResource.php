@@ -6,6 +6,7 @@ use App\Filament\Resources\Members\Pages\CreateMember;
 use App\Filament\Resources\Members\Pages\EditMember;
 use App\Filament\Resources\Members\Pages\ListMembers;
 use App\Models\Member;
+use App\Support\Media;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -48,6 +49,7 @@ class MemberResource extends Resource
                     ->disk('media')
                     ->directory('leden')
                     ->visibility('public')
+                    ->maxSize(Media::MAX_UPLOAD_KB)
                     ->imageResizeMode('cover')
                     ->columnSpanFull(),
                 TextInput::make('name')

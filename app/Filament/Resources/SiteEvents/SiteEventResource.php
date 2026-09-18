@@ -5,13 +5,17 @@ namespace App\Filament\Resources\SiteEvents;
 use App\Filament\Resources\SiteEvents\Pages\CreateSiteEvent;
 use App\Filament\Resources\SiteEvents\Pages\EditSiteEvent;
 use App\Filament\Resources\SiteEvents\Pages\ListSiteEvents;
+use App\Models\Album;
 use App\Models\SiteEvent;
+use App\Support\ArchiveSlug;
+use App\Support\Media;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -55,13 +59,17 @@ class SiteEventResource extends Resource
                 TextInput::make('slug')
                     ->required()
                     ->unique(ignoreRecord: true)
+                    ->rules(ArchiveSlug::rules('albums'))
                     ->maxLength(255)
-                    ->helperText('URL: lcdendermonde.be/jouw-slug'),
+                    ->helperText('URL: lcdendermonde.be/jouw-slug — mag niet botsen met een album of een vaste pagina.'),
                 TextInput::make('date_label')
                     ->label('Datumlabel'),
-                TextInput::make('related_album')
-                    ->label('Gerelateerd album (slug)')
-                    ->helperText('Optioneel, bv. fotoreportage-recharter'),
+                Select::make('related_album')
+                    ->label('Gerelateerd album')
+                    ->options(fn (): array => Album::query()->orderBy('title')->pluck('title', 'slug')->all())
+                    ->searchable()
+                    ->preload()
+                    ->helperText('Optioneel. Verschijnt als link naar het fotoalbum.'),
                 MarkdownEditor::make('body')
                     ->label('Inhoud')
                     ->columnSpanFull(),
@@ -70,7 +78,8 @@ class SiteEventResource extends Resource
                     ->image()
                     ->disk('media')
                     ->directory('events')
-                    ->visibility('public'),
+                    ->visibility('public')
+                    ->maxSize(Media::MAX_UPLOAD_KB),
                 FileUpload::make('images')
                     ->label('Extra beelden')
                     ->image()
@@ -79,6 +88,7 @@ class SiteEventResource extends Resource
                     ->disk('media')
                     ->directory('events')
                     ->visibility('public')
+                    ->maxSize(Media::MAX_UPLOAD_KB)
                     ->columnSpanFull(),
             ]);
     }

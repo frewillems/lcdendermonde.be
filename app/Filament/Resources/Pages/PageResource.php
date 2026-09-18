@@ -2,13 +2,10 @@
 
 namespace App\Filament\Resources\Pages;
 
-use App\Filament\Resources\Pages\Pages\CreatePage;
 use App\Filament\Resources\Pages\Pages\EditPage;
 use App\Filament\Resources\Pages\Pages\ListPages;
 use App\Models\Page;
 use BackedEnum;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\TextInput;
@@ -17,6 +14,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class PageResource extends Resource
 {
@@ -34,6 +32,21 @@ class PageResource extends Resource
 
     protected static ?int $navigationSort = 5;
 
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return $record instanceof Page && ! $record->isLocked();
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return false;
+    }
+
     public static function form(Schema $schema): Schema
     {
         return $schema
@@ -46,7 +59,9 @@ class PageResource extends Resource
                     ->required()
                     ->unique(ignoreRecord: true)
                     ->maxLength(255)
-                    ->helperText('origin-story en voorwaarden worden automatisch op de site getoond.'),
+                    ->disabled()
+                    ->dehydrated()
+                    ->helperText('Alleen origin-story (ledenpagina) en voorwaarden staan op de site. De slug kan niet gewijzigd worden.'),
                 MarkdownEditor::make('body')
                     ->label('Inhoud')
                     ->columnSpanFull(),
@@ -69,11 +84,6 @@ class PageResource extends Resource
             ])
             ->recordActions([
                 EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
@@ -81,7 +91,6 @@ class PageResource extends Resource
     {
         return [
             'index' => ListPages::route('/'),
-            'create' => CreatePage::route('/create'),
             'edit' => EditPage::route('/{record}/edit'),
         ];
     }
