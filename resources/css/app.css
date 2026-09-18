@@ -1,0 +1,72 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/livewire/src/Features/SupportPagination/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Figtree', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Fraunces', ui-serif, Georgia, serif;
+    --color-navy: #0e3a45;
+    --color-navy-deep: #0a2b33;
+    --color-gold: #c4a35a;
+    --color-gold-soft: #e3d0a3;
+    --color-cream: #f7f3ec;
+    --color-cream-dark: #ebe4d6;
+    --color-ink: #1a1714;
+    --color-muted: #5c574f;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+
+    body {
+        @apply bg-cream text-ink antialiased;
+    }
+
+    ::selection {
+        background: #c4a35a;
+        color: #0e3a45;
+    }
+}
+
+@utility hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c4a35a, transparent);
+}
+
+.prose-club {
+    @apply max-w-none text-base leading-relaxed text-ink/90;
+}
+
+.prose-club p + p {
+    @apply mt-4;
+}
+
+.prose-club h2 {
+    @apply font-serif text-2xl text-navy mt-10 mb-3;
+}
+
+.prose-club h3 {
+    @apply font-serif text-xl text-navy mt-8 mb-2;
+}
+
+.prose-club a {
+    @apply text-navy underline decoration-gold underline-offset-4 hover:text-gold;
+}
+
+.prose-club ul {
+    @apply list-disc pl-5 space-y-2;
+}
+
+.prose-club strong {
+    @apply font-semibold text-navy;
+}

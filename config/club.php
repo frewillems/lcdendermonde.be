@@ -1,0 +1,41 @@
+<?php
+
+return [
+    'name' => "Ladies' Circle Dendermonde",
+    'short_name' => 'LC13 Dendermonde',
+    'motto' => 'Friendship and Service',
+    'tagline' => 'Een serviceclub voor ondernemende vrouwen tot 45 jaar, in en rond Dendermonde.',
+    'circle' => 'LC13',
+    'founded_label' => 'Chartermeeting 19 november 1983',
+    'charter' => '1983-11-19',
+    'recharter' => '2017-03-11',
+    'peetcircle' => 'LC3 Oostende',
+    'godchildren' => [
+        'LC23 Maldegem',
+        'LC30 Wetteren',
+        'LC34 Affligem-Aalst',
+    ],
+    'address' => [
+        'line1' => 'Sint-Gillislaan 47',
+        'city' => '9200 Dendermonde',
+        'country' => 'België',
+    ],
+    'vat' => 'BE 0767.869.717',
+    'iban' => 'BE61 7360 3457 5817',
+    'email' => 'info@lcdendermonde.be',
+    'contact_email' => 'contactlady@lcdendermonde.be',
+    'phone' => '0497 61 44 34',
+    'phone_href' => 'tel:+32497614434',
+    'facebook' => 'https://www.facebook.com/ladiescircledendermonde/',
+    'national' => 'https://ladiescircle.be/nl',
+    'logo' => '/media/brand/lc-logo-paard.jpg',
+    'logo_belgium' => '/media/brand/lcb-logo.png',
+    'nav' => [
+        ['label' => 'Home', 'route' => 'home'],
+        ['label' => 'Info club', 'route' => 'info-club'],
+        ['label' => 'Leden', 'route' => 'leden'],
+        ['label' => 'Projecten', 'route' => 'projecten'],
+        ['label' => 'Lid worden', 'route' => 'lid-worden'],
+        ['label' => 'Contact', 'route' => 'contact'],
+    ],
+];
