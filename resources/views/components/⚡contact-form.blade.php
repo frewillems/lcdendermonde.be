@@ -77,7 +77,7 @@ new class extends Component
 };
 ?>
 
-<div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-navy/5 sm:p-8">
+<div class="panel p-6 sm:p-8">
     @if ($sent)
         <p class="font-serif text-2xl text-navy">Verzonden</p>
         <p class="mt-3 text-muted">Dankjewel. We beantwoorden je bericht zo snel mogelijk.</p>
@@ -101,7 +101,7 @@ new class extends Component
                 <textarea wire:model="bericht" rows="6" class="mt-1 w-full rounded-lg border-0 bg-cream px-3 py-2.5 ring-1 ring-navy/10 focus:ring-2 focus:ring-gold" required></textarea>
                 @error('bericht') <span class="text-sm text-red-700">{{ $message }}</span> @enderror
             </label>
-            <button type="submit" class="rounded-full bg-navy px-6 py-3 text-sm font-semibold text-cream hover:bg-navy-deep" wire:loading.attr="disabled">Versturen</button>
+            <button type="submit" class="btn" wire:loading.attr="disabled">Versturen</button>
         </form>
     @endif
 </div>

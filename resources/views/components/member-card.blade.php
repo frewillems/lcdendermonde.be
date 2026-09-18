@@ -1,6 +1,6 @@
 @props(['member'])
 
-<article class="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-navy/5">
+<article class="panel group overflow-hidden">
     <div class="aspect-[4/5] overflow-hidden bg-cream-dark">
         <img
             src="{{ $member['photo'] }}"
@@ -10,7 +10,7 @@
         >
     </div>
     <div class="p-5">
-        <h3 class="font-serif text-xl text-navy">{{ $member['name'] }}</h3>
+        <h3 class="font-serif text-2xl text-navy">{{ $member['name'] }}</h3>
         @if (! empty($member['role']))
             <p class="mt-1 text-sm font-medium text-gold">{{ $member['role'] }}</p>
         @endif

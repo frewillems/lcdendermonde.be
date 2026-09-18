@@ -17,7 +17,7 @@
             <p>Als serviceclub dragen we ons steentje bij aan sociale projecten. Elke club heeft een eigen lokaal engagement waarvoor we fondsen werven. Daarnaast steunen we ook nationale en internationale projecten. Elk jaar is er een internationale jaarvergadering en een nieuw nationaal bestuur met een jaarthema.</p>
             <p class="text-sm text-muted">Bron: <a href="{{ config('club.national') }}">Ladies’ Circle Belgium</a></p>
         </div>
-        <aside class="rounded-2xl bg-white p-7 ring-1 ring-navy/5">
+        <aside class="panel p-7">
             <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">LC13 Dendermonde</p>
             <dl class="mt-4 space-y-3 text-sm">
                 <div><dt class="text-muted">Peetcircle</dt><dd class="font-medium">{{ config('club.peetcircle') }}</dd></div>

@@ -18,7 +18,7 @@
             </section>
         @endforeach
 
-        <section class="rounded-2xl bg-white p-8 ring-1 ring-navy/5">
+        <section class="panel p-8">
             <h2 class="font-serif text-2xl text-navy">Fotoalbums</h2>
             <p class="mt-2 text-muted">Sfeerbeelden van eerdere projecten en feesten.</p>
             <ul class="mt-4 space-y-2 font-medium text-navy">

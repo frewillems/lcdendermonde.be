@@ -7,16 +7,17 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Figtree', ui-sans-serif, system-ui, sans-serif;
-    --font-serif: 'Fraunces', ui-serif, Georgia, serif;
-    --color-navy: #0e3a45;
-    --color-navy-deep: #0a2b33;
-    --color-gold: #c4a35a;
-    --color-gold-soft: #e3d0a3;
-    --color-cream: #f7f3ec;
-    --color-cream-dark: #ebe4d6;
-    --color-ink: #1a1714;
-    --color-muted: #5c574f;
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Cormorant Garamond', ui-serif, Georgia, serif;
+    --color-navy: #6b2d5b;
+    --color-navy-deep: #4e1f44;
+    --color-gold: #e85a8c;
+    --color-gold-soft: #f7b6cf;
+    --color-lilac: #d9c4f0;
+    --color-cream: #fff6f9;
+    --color-cream-dark: #f8ddea;
+    --color-ink: #4a3040;
+    --color-muted: #9a7084;
 }
 
 @layer base {
@@ -30,17 +31,16 @@
 
     body {
         @apply bg-cream text-ink antialiased;
+        background-image:
+            radial-gradient(ellipse 80% 50% at 100% -10%, rgba(217, 196, 240, 0.55), transparent 55%),
+            radial-gradient(ellipse 60% 40% at -10% 20%, rgba(247, 182, 207, 0.5), transparent 50%);
+        background-attachment: fixed;
     }
 
     ::selection {
-        background: #c4a35a;
-        color: #0e3a45;
+        background: #e85a8c;
+        color: #fff;
     }
-}
-
-@utility hairline {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #c4a35a, transparent);
 }
 
 .prose-club {
@@ -52,15 +52,15 @@
 }
 
 .prose-club h2 {
-    @apply font-serif text-2xl text-navy mt-10 mb-3;
+    @apply font-serif text-3xl font-medium text-navy mt-10 mb-3;
 }
 
 .prose-club h3 {
-    @apply font-serif text-xl text-navy mt-8 mb-2;
+    @apply font-serif text-2xl italic text-navy mt-8 mb-2;
 }
 
 .prose-club a {
-    @apply text-navy underline decoration-gold underline-offset-4 hover:text-gold;
+    @apply text-gold underline decoration-gold-soft underline-offset-4 hover:text-navy;
 }
 
 .prose-club ul {
@@ -69,4 +69,20 @@
 
 .prose-club strong {
     @apply font-semibold text-navy;
+}
+
+.btn {
+    @apply inline-flex items-center justify-center rounded-full bg-navy px-6 py-3 text-sm font-semibold text-cream shadow-sm transition hover:bg-navy-deep;
+}
+
+.btn-accent {
+    @apply inline-flex items-center justify-center rounded-full bg-gold px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-navy;
+}
+
+.btn-ghost {
+    @apply inline-flex items-center justify-center rounded-full border border-gold/40 bg-white/70 px-6 py-3 text-sm font-semibold text-navy backdrop-blur transition hover:bg-gold-soft/40;
+}
+
+.panel {
+    @apply rounded-[1.75rem] bg-white/80 shadow-[0_18px_50px_-28px_rgba(107,45,91,0.45)] ring-1 ring-gold-soft/60 backdrop-blur-sm;
 }

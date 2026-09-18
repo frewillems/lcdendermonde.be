@@ -21,7 +21,7 @@
                 ['Rosé Pipoli', '€65 / doos', 'Zes flessen'],
                 ['Olijfolie', '€25 / fles', 'Koudgeperst'],
             ] as [$name, $price, $note])
-                <article class="rounded-2xl bg-white p-6 ring-1 ring-navy/5">
+                <article class="panel p-6">
                     <h2 class="font-serif text-xl text-navy">{{ $name }}</h2>
                     <p class="mt-2 text-2xl font-semibold text-gold">{{ $price }}</p>
                     <p class="mt-1 text-sm text-muted">{{ $note }}</p>

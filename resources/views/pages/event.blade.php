@@ -8,7 +8,7 @@
 
     <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
         @if (! empty($event['image']))
-            <img src="{{ $event['image'] }}" alt="" class="mb-10 w-full rounded-2xl object-cover">
+            <img src="{{ $event['image'] }}" alt="" class="mb-10 w-full rounded-[1.75rem] object-cover shadow-lg">
         @endif
         <div class="prose-club">
             {!! \Illuminate\Support\Str::markdown($event['body'] ?? '') !!}

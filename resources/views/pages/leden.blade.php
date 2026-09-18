@@ -7,7 +7,7 @@
     <x-page-hero kicker="Leden" title="De ladies van LC13" intro="Een hechte groep vrouwen die vriendschap en service even ernstig neemt als een goed glas rosé." />
 
     <section class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-        <div class="font-serif text-xl leading-relaxed text-navy sm:text-2xl">
+        <div class="text-xl leading-relaxed text-navy sm:text-2xl">
             @foreach (preg_split('/\n+/', trim($originStory)) as $line)
                 <p class="{{ $loop->first ? '' : 'mt-3' }}">{{ $line }}</p>
             @endforeach

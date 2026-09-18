@@ -8,7 +8,7 @@
 
     <div class="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-5">
         <div class="lg:col-span-2">
-            <div class="rounded-2xl bg-white p-7 ring-1 ring-navy/5">
+            <div class="panel p-7">
                 <p class="font-serif text-2xl text-navy">{{ config('club.name') }}</p>
                 <p class="mt-4 text-sm leading-7 text-muted">
                     {{ config('club.address.line1') }}<br>

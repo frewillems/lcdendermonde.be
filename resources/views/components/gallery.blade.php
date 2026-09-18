@@ -6,7 +6,7 @@
     @keydown.escape.window="src = null"
 >
     @foreach ($images as $image)
-        <button type="button" class="aspect-square overflow-hidden rounded-xl bg-cream-dark" @click="src = '{{ $image }}'">
+        <button type="button" class="aspect-square overflow-hidden rounded-2xl bg-cream-dark ring-1 ring-gold-soft/70" @click="src = '{{ $image }}'">
             <img src="{{ $image }}" alt="{{ $alt }}" class="h-full w-full object-cover" loading="lazy">
         </button>
     @endforeach
@@ -20,6 +20,6 @@
         role="dialog"
         aria-modal="true"
     >
-        <img :src="src" alt="" class="max-h-full max-w-full rounded-lg shadow-2xl" @click.stop>
+        <img :src="src" alt="" class="max-h-full max-w-full rounded-2xl shadow-2xl" @click.stop>
     </div>
 </div>
